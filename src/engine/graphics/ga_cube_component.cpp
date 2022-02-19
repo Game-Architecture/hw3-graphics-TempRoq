@@ -106,13 +106,34 @@ static const GLushort k_cube_indices[] = {
 
 void ga_cube_component::create_vertex_array()
 {
+	glGenVertexArrays(1, &_vao);
+	glBindVertexArray(_vao);
+
+	glGenBuffers(3, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+	glBufferData(GL_ARRAY_BUFFER, 72 * sizeof(GLfloat), k_cube_vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 36, k_cube_indices, GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_UNSIGNED_SHORT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo[2]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 48, k_cube_texcoords, GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(2);
+
+
 	// TODO: Homework 3 - Create the vertex array object _vao and any 
 	// buffers needed to hold the vertex data provided above.
 }
 
 void ga_cube_component::destroy_vertex_array()
 {
-	// TODO: Homework 3 - Do any necessary cleanup here.
+	glDeleteBuffers(3, vbo);
+	glDeleteVertexArrays(1, &_vao);
 }
 
 ga_cube_component::ga_cube_component(ga_entity* ent, const char* texture_file) : ga_component(ent)

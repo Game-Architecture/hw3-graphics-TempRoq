@@ -2,9 +2,11 @@
 
 uniform sampler2D u_texture;
 
-// TODO: Homework 3 - Add any other necessary uniforms or input/output variables here
+in vec2 UV;
+
+out vec3 FragColor;
 
 void main()
 {
-	// TODO: Homework 3
+	FragColor = texture(u_texture, UV);
 }

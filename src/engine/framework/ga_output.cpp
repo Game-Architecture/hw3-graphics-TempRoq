@@ -41,7 +41,8 @@ ga_output::~ga_output()
 
 void ga_output::draw(const ga_static_drawcall& drawcall) const
 {
-	// TODO: Homework 3 - Draw the geometry from the array object in drawcall
+	glBindVertexArray(drawcall._vao);
+	glDrawElements(GL_TRIANGLES, drawcall._index_count, GL_UNSIGNED_SHORT, 0);
 }
 
 void ga_output::update(ga_frame_params* params)

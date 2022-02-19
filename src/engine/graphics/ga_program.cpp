@@ -21,11 +21,14 @@
 
 void ga_uniform::set(const ga_mat4f& mat)
 {
-	// TODO: Homework 3 - Set the value of the uniform variable at location _location to mat
+	glUniformMatrix4fv(_location, 1, GL_FALSE, &mat.data[0][0]);
 }
 
 void ga_uniform::set(const ga_texture& tex, uint32_t unit)
 {
+	glActiveTexture(GL_TEXTURE0 + unit);
+	glBindTexture(GL_TEXTURE_2D, tex._handle);
+	glUniform1i(_location, unit);
 	// TODO: Homework 3 - Set the value of the uniform variable at location _location to the
 	// texture unit holding tex
 }

@@ -33,6 +33,7 @@ private:
 	uint32_t _index_count;
 
 	uint32_t _vao;
+	uint32_t vbo[3];
 
 	// TODO: Homework 3 - Add any additional members you need here (ie. Handles to vertex arrays and buffers)
 };

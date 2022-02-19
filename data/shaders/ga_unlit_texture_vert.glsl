@@ -2,9 +2,13 @@
 
 uniform mat4 u_mvp;
 
-// TODO: Homework 3 - Add any other necessary uniforms or input/output variables here
+layout (location = 0) in vec3 vertexPositionModelSpace;
+layout (location = 2) in vec2 vertexUV;
+
+out vec2 UV;
 
 void main()
 {
-	// TODO: Homework 3
+	gl_Position = u_mvp * vec4(vertexPositionModelSpace, 1);
+	UV = vertexUV;
 }
